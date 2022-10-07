@@ -1,0 +1,25 @@
+{
+  "name": "recursive-object-update",
+  "version": "1.0.0",
+  "description": "value update using callback",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dnyaneshbhalerao/recursivecallback.git"
+  },
+  "keywords": [
+    "recursive",
+    "object",
+    "update"
+  ],
+  "author": "Dnyaneshwar Bhalerao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dnyaneshbhalerao/recursivecallback/issues"
+  },
+  "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme",
+  "type": "module"
+}
