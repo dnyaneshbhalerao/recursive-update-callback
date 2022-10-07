@@ -4,7 +4,7 @@ const updateObject = (objRef, objKey, callBack) => {
   }
   return objRef;
 }
-const sanitizeObject= (obj, callBack) => {
+function sanitizeObject(obj, callBack){
   if(typeof obj === 'object' && obj !== null) {
       Object.keys(obj).forEach(objKey => {
         if(typeof obj[objKey] === 'string') {
@@ -16,4 +16,4 @@ const sanitizeObject= (obj, callBack) => {
   return obj;
 }
 
-export default sanitizeObject
+module.exports = sanitizeObject;

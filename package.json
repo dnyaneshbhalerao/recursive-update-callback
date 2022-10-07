@@ -1,6 +1,6 @@
 {
   "name": "recursive-object-update",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "value update using callback",
   "main": "main.js",
   "scripts": {
@@ -20,6 +20,5 @@
   "bugs": {
     "url": "https://github.com/dnyaneshbhalerao/recursivecallback/issues"
   },
-  "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme",
-  "type": "module"
+  "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme"
 }
