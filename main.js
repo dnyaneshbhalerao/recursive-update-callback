@@ -1,5 +1,5 @@
 const updateObject = (objRef, objKey, callBack) => {
-  if(typeof callback === 'function'){
+  if(typeof callBack === 'function'){
     objRef[objKey] = callBack(objRef[objKey])
   }
   return objRef;
