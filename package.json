@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/dnyaneshbhalerao/recursivecallback/issues"
   },
-  "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme"
+  "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme",
+  "dependencies": {
+    "package-lock.json": "^1.0.0"
+  }
 }
