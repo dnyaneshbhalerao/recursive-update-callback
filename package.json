@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/dnyaneshbhalerao/recursivecallback#readme",
   "dependencies": {
-    "package-lock.json": "^1.0.0"
+    "package-lock.json": "^1.0.5"
   }
 }
