@@ -13,6 +13,8 @@
   "keywords": [
     "recursive",
     "object",
+    "deep",
+    "clone"
     "update"
   ],
   "author": "Dnyaneshwar Bhalerao",
