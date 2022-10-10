@@ -1,4 +1,4 @@
-[![Node.js Package](https://github.com/dnyaneshbhalerao/recursivecallback/actions/workflows/npm-publish.yml/badge.svg)](https://github.com/dnyaneshbhalerao/recursivecallback/actions/workflows/npm-publish.yml)
+[![Node.js Package](https://github.com/dnyaneshbhalerao/recursive-update-callback/actions/workflows/npm-publish.yml/badge.svg?branch=v1.0.6)](https://github.com/dnyaneshbhalerao/recursive-update-callback/actions/workflows/npm-publish.yml)
 
 
 # Update each Object attribute with call back
