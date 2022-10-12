@@ -1,43 +1,45 @@
-const assert = require('node:assert/strict');
-const sanitizeObject = require("./main.js")
+if (Number(process.versions.node.replaceAll(".", "")) > 14) {
+    const assert = require('node:assert/strict');
+    const sanitizeObject = require("./main.js")
 
-const actual = sanitizeObject({
-    propertyToupdate: "/sometext/"
-}, function(propValue){
-    return propValue + "update"
-});
+    const actual = sanitizeObject({
+        propertyToupdate: "/sometext/"
+    }, function (propValue) {
+        return propValue + "update"
+    });
 
-const expected = {
-    propertyToupdate: "/sometext/update"
-}
+    const expected = {
+        propertyToupdate: "/sometext/update"
+    }
 
-assert.equal(JSON.stringify(actual), JSON.stringify(expected))
+    assert.equal(JSON.stringify(actual), JSON.stringify(expected))
+    console.log("Object Test Passed");
 
-console.log("Object Test Passed");
-
-const actualArray = sanitizeObject([{
+    const actualArray = sanitizeObject([{
         test: "test"
     },
-    "my old value",
+        "my old value",
     [{
         test3: [{
             nested: "to be appended by"
         }]
     }]
-], function (oldValue) {
-    return oldValue + " append this string"
-}, true);
+    ], function (oldValue) {
+        return oldValue + " append this string"
+    });
 
-const expectedArray = [{
+    const expectedArray = [{
         test: "test append this string"
     },
-    "my old value append this string",
+        "my old value append this string",
     [{
         test3: [{
             nested: "to be appended by append this string"
         }]
     }]
-]
+    ]
 
-assert.equal(JSON.stringify(actualArray), JSON.stringify(expectedArray))
-console.log("Array Test Passed");
+    assert.equal(JSON.stringify(actualArray), JSON.stringify(expectedArray))
+    console.log("Array Test Passed");
+
+}
