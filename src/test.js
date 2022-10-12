@@ -1,4 +1,4 @@
-if (Number(process.versions.node.replaceAll(".", "")) > 14) {
+if (Number(!process.versions.node.includes("14"))) {
     const assert = require('node:assert/strict');
     const sanitizeObject = require("./main.js")
 
