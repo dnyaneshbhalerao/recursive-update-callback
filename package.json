@@ -1,8 +1,8 @@
 {
   "name": "recursive-object-update",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "value update using callback",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "node ./src/test.js"
   },
