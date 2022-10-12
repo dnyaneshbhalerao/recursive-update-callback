@@ -4,18 +4,62 @@
 
 # Update each Object attribute with call back
 
-## Example
+## Example for object
 
-```
+`
 var recursiveObjectUpdate = require("recursive-object-update")
-console.log(recursiveObjectUpdate({test: {
+recursiveObjectUpdate({
     test: {
         test: {
             test: {
-            propery: "old data"
+                test: {
+                    propery: "old data"
+                }
             }
         }
     }
-}}, function (propValue){
+}, function (propValue){
     return propValue + " mydata"
-}))
+})
+
+// O/P
+
+{
+    test: {
+        test: {
+            test: {
+                test: {
+                    propery: "old data mydata"
+                }
+            }
+        }
+    }
+}`
+
+## Example for array
+`
+var recursiveObjectUpdate = require("recursive-object-update")
+recursiveObjectUpdate([{
+        test: "test"
+    },
+        "my old value",
+    [{
+        test3: [{
+            nested: "to be appended by"
+        }]
+    }]
+], function (propValue) {
+    return propValue + " append"
+})
+
+// O/P
+[{
+        test: "test append"
+    },
+        "my old value append",
+    [{
+        test3: [{
+            nested: "to be appended by append"
+        }]
+    }]
+]`
