@@ -6,7 +6,7 @@
 
 ## Example for object
 
-`
+```
 var recursiveObjectUpdate = require("recursive-object-update")
 recursiveObjectUpdate({
     test: {
@@ -34,7 +34,7 @@ recursiveObjectUpdate({
             }
         }
     }
-}`
+}```
 
 ## Example for array
 `
