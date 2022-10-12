@@ -34,10 +34,11 @@ recursiveObjectUpdate({
             }
         }
     }
-}```
+}
+```
 
 ## Example for array
-`
+```
 var recursiveObjectUpdate = require("recursive-object-update")
 recursiveObjectUpdate([{
         test: "test"
@@ -62,4 +63,5 @@ recursiveObjectUpdate([{
             nested: "to be appended by append"
         }]
     }]
-]`
+]
+```
