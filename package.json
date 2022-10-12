@@ -4,7 +4,7 @@
   "description": "value update using callback",
   "main": "main.js",
   "scripts": {
-    "test": "node ./test.js"
+    "test": "node ./src/test.js"
   },
   "repository": {
     "type": "git",

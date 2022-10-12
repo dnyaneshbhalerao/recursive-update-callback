@@ -1,1 +1,0 @@
-const updateObject=(t,e,n)=>("function"==typeof n&&(t[e]=n(t[e])),t);function sanitizeObject(t,e){return"object"==typeof t&&null!==t&&Object.keys(t).forEach(n=>"string"==typeof t[n]?updateObject(t,n,e):sanitizeObject(t[n],e)),t}module.exports=sanitizeObject;
