@@ -34,9 +34,9 @@ if (Number(!process.versions.node.includes("14"))) {
   const objTNotUpdate = {
     propertyToupdate: "/sometext/"
   }
-  const expectedClone = sanitizeObject(objToUpdate, function (propValue) {
-    return propValue + "update"
-  })
+  const expectedClone = sanitizeObject(objTNotUpdate, function (propValue) {
+    return propValue + " update"
+  }, true)
   assert.notDeepEqual(JSON.stringify(objTNotUpdate), JSON.stringify(expectedClone))
   console.log("Object clone Test Passed");
 
@@ -50,11 +50,30 @@ if (Number(!process.versions.node.includes("14"))) {
     }]
   }]
   ]
-  const expectedCloneArray = sanitizeObject(arrToUpdate, function (oldValue) {
+  const expectedCloneArray = sanitizeObject(arrCloneNotToUpdate, function (oldValue) {
     return oldValue + " append this string"
-  });
+  }, true);
 
   assert.notDeepEqual(JSON.stringify(arrCloneNotToUpdate), JSON.stringify(expectedCloneArray))
   console.log("Array Clone Test Passed");
+
+  // Test 
+  const testArray = [{
+    test: "test"
+  },
+  "my old value",
+  [{
+    test3: [{
+      nested: "to be appended by"
+    }]
+  }]
+  ]
+  const expectedTestArray = sanitizeObject(testArray, function (oldValue) {
+    return oldValue + " append this string"
+  }, true);
+
+  assert.notDeepEqual(JSON.stringify(testArray), JSON.stringify(expectedTestArray))
+  console.log("Array Clone Test Passed");
+
 
 }
