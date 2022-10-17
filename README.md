@@ -2,66 +2,152 @@
 [![Node.js CI](https://github.com/dnyaneshbhalerao/recursive-update-callback/actions/workflows/node.js.yml/badge.svg?branch=main)](https://github.com/dnyaneshbhalerao/recursive-update-callback/actions/workflows/node.js.yml)
 
 
-# Update each Object attribute with call back
+# Update each Object attribute with call back 
 
-## Example for object
+## Introduction
+
+Welcome to recursive update object attribute with callback. This library is intented to update/sanitize the string and number value which reside in the nested object or nested array. It has provision to directly update object reference which is passed as first arguement. If you wanted to replicate (clone) the object structure please pass true as value to third argument.
+
+For better understanding of the librabry please refer to examples given below.
+
+### NOTE: Don't forget to return from callback.
+
+
+### Steps to install library
+npm command to install
+```
+npm i recursive-object-update 
+```
+yarn command
+```
+yarn add recursive-object-update
+```
+
+## Example for object Modification
 
 ```
 var recursiveObjectUpdate = require("recursive-object-update")
-recursiveObjectUpdate({
+var objectToUpdate = {
+  test: {
     test: {
+      test: {
         test: {
-            test: {
-                test: {
-                    propery: "old data"
-                }
-            }
+          propery: "old data"
         }
+      }
     }
-}, function (propValue){
-    return propValue + " mydata"
+  }
+}
+recursiveObjectUpdate(objectToUpdate, function (propValue){
+  return propValue + " mydata"
 })
 
-// O/P
+// O/P : => update object reference
 
 {
+  test: {
     test: {
+      test: {
         test: {
-            test: {
-                test: {
-                    propery: "old data mydata"
-                }
-            }
+          propery: "old data mydata"
         }
+      }
     }
+  }
 }
 ```
 
-## Example for array
+## Example for array modification
 ```
 var recursiveObjectUpdate = require("recursive-object-update")
-recursiveObjectUpdate([{
-        test: "test"
-    },
-        "my old value",
-    [{
-        test3: [{
-            nested: "to be appended by"
-        }]
+const arrayRefToUpdate = [{
+    test: "test"
+  },
+    "my old value",
+  [{
+    test3: [{
+      nested: "to be appended by"
     }]
-], function (propValue) {
-    return propValue + " append"
+  }]
+]
+recursiveObjectUpdate(arrayRefToUpdate, function (propValue) {
+  return propValue + " append"
 })
 
-// O/P
+// O/P => update array reference
 [{
-        test: "test append"
-    },
-        "my old value append",
-    [{
-        test3: [{
-            nested: "to be appended by append"
-        }]
+    test: "test append"
+  },
+  "my old value append",
+  [{
+    test3: [{
+      nested: "to be appended by append"
     }]
+  }]
 ]
 ```
+
+## Example for object clone with third argument set true
+
+```
+var recursiveObjectUpdate = require("recursive-object-update")
+var objectToUpdate = {
+  test: {
+    test: {
+      test: {
+        test: {
+          propery: "old data"
+        }
+      }
+    }
+  }
+}
+recursiveObjectUpdate(objectToUpdate, function (propValue){
+  return propValue + " mydata"
+}, true)
+
+// O/P : => Does not update object reference
+
+{
+  test: {
+    test: {
+      test: {
+        test: {
+          propery: "old data mydata"
+        }
+      }
+    }
+  }
+}
+```
+
+## Example for array modification with third argument set true
+```
+var recursiveObjectUpdate = require("recursive-object-update")
+const arrayRefToUpdate = [{
+    test: "test"
+  },
+    "my old value",
+  [{
+    test3: [{
+      nested: "to be appended by"
+    }]
+  }]
+]
+recursiveObjectUpdate(arrayRefToUpdate, function (propValue) {
+  return propValue + " append"
+}, true)
+
+// O/P => Does not update reference
+[{
+    test: "test append"
+  },
+  "my old value append",
+  [{
+    test3: [{
+      nested: "to be appended by append"
+    }]
+  }]
+]
+```
+
