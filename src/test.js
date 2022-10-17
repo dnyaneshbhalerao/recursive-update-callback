@@ -130,7 +130,7 @@ if (Number(!process.versions.node.includes("14"))) {
       }
     }
   }
-  assert.notDeepEqual(sanitizeObject(objectToUpdate, function (propValue){
+  assert.deepEqual(sanitizeObject(objectToUpdate, function (propValue){
         return propValue + " mydata"
       }, true),{
         test: {
@@ -144,4 +144,28 @@ if (Number(!process.versions.node.includes("14"))) {
         }
       })
     console.log("Test example 3 passed")
+
+  const arrayRefToUpdate2 = [{
+      test: "test"
+    },
+      "my old value",
+    [{
+      test2: [{
+        nested: "to be appended by"
+      }]
+    }]
+  ]
+  assert.deepEqual(sanitizeObject(arrayRefToUpdate2, function (propValue) {
+    return propValue + " append"
+  }, true), [{
+    test: "test append"
+  },
+  "my old value append",
+  [{
+    test2: [{
+      nested: "to be appended by append"
+    }]
+  }]
+])
+console.log("Test example 4 passed")
 }
