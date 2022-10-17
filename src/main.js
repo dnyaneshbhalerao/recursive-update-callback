@@ -1,21 +1,22 @@
-const updateObject = (objRef, objKey, callBack, isClone) => {
+const updateObject = (objRef, objKey, callBack) => {
   if (typeof callBack === 'function') {
     objRef[objKey] = callBack(objRef[objKey]);
   }
   return objRef;
 }
+
 function sanitizeObject(obj, callBack, isClone = false) {
   if (typeof obj === 'object' && obj !== null) {
     Object.keys(obj).forEach(objKey => {
-      let tempObj = obj[objKey]
-      if (typeof tempObj === 'string' || typeof tempObj === 'number') {
-        if(isClone) {
-          obj = Array.isArray(obj) ? [...obj] : {...obj};
-        }
-        return updateObject(obj, objKey, callBack, isClone)
-      }else {
-        return sanitizeObject(tempObj, callBack, isClone)
+      const tempObjValue = obj[objKey];
+      if(isClone && typeof tempObjValue === 'object') {
+        obj = Array.isArray(obj) ? [...obj] : {...obj};
       }
+      if (typeof tempObjValue === 'string' || typeof tempObjValue === 'number') {
+        return updateObject(obj, objKey, callBack)
+      }else {
+        return sanitizeObject(tempObjValue, callBack, isClone)
+      }       
     })
   }
   return obj;

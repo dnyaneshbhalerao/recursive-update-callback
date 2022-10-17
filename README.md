@@ -10,8 +10,9 @@ Welcome to recursive update object attribute with callback. This library is inte
 
 For better understanding of the librabry please refer to examples given below.
 
-### NOTE: Don't forget to return from callback.
+#### NOTE: Don't forget to return from callback.
 
+### Important stabale version is 1.1.4
 
 ### Steps to install library
 npm command to install
