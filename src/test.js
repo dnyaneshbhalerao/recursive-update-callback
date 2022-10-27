@@ -1,6 +1,13 @@
 if (Number(!process.versions.node.includes("14"))) {
   const assert = require('node:assert/strict');
   const sanitizeObject = require("./main.js")
+
+  //Premitive object test
+  assert.deepEqual(sanitizeObject("string", prop =>prop + " new", true), "string new")
+  console.log("string test passed")
+
+  assert.deepEqual(sanitizeObject(1, prop =>prop + 2), 3)
+  console.log("number test passed")
   
   //Test for object one level without clone
   const objToUpdate = {

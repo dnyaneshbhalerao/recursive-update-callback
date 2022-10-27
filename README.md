@@ -12,7 +12,7 @@ For better understanding of the librabry please refer to examples given below.
 
 #### NOTE: Don't forget to return from callback.
 
-#### Important!!! stabale release version is 1.1.4
+#### Important!!! stabale release version is 1.1.5
 
 ### Steps to install library
 npm command to install

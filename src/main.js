@@ -6,6 +6,10 @@ const updateObject = (objRef, objKey, callBack) => {
 }
 
 function sanitizeObject(obj, callBack, isClone = false) {
+  if ((typeof obj === 'string' || typeof obj === 'number' )&& obj !== null && typeof callBack === "function") {
+    return callBack(obj)
+  }
+  
   if (typeof obj === 'object' && obj !== null) {
     Object.keys(obj).forEach(objKey => {
       const tempObjValue = obj[objKey];
