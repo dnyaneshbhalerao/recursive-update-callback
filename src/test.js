@@ -2,12 +2,21 @@ if (Number(!process.versions.node.includes("14"))) {
   const assert = require('node:assert/strict');
   const sanitizeObject = require("./main.js")
 
-  //Premitive object test
+  // Premitive object test
   assert.deepEqual(sanitizeObject("string", prop =>prop + " new", true), "string new")
   console.log("string test passed")
 
   assert.deepEqual(sanitizeObject(1, prop =>prop + 2), 3)
   console.log("number test passed")
+
+  assert.deepEqual(sanitizeObject(null, prop =>prop + 2), null)
+  console.log("null test passed")
+
+  assert.deepEqual(sanitizeObject(undefined, prop =>prop + 2), undefined)
+  console.log("undefined test passed")
+  
+  assert.deepEqual(sanitizeObject(true, prop =>prop + 2), true)
+  console.log("boolean test passed")
   
   //Test for object one level without clone
   const objToUpdate = {
@@ -16,7 +25,9 @@ if (Number(!process.versions.node.includes("14"))) {
   const expected = sanitizeObject(objToUpdate, function (propValue) {
     return propValue + "update"
   })
-  assert.deepEqual(objToUpdate, expected)
+  assert.deepEqual(expected, {
+    propertyToupdate: "/sometext/update"
+  })
   console.log("Object one level without clone Test Passed");
 
   // Test for nested level
@@ -28,10 +39,17 @@ if (Number(!process.versions.node.includes("14"))) {
         test : "/sometext/"
     }
   }
-  const expectedNestedObj = sanitizeObject(nestedObj, function (propValue) {
+  const actualNestedObj = sanitizeObject(nestedObj, function (propValue) {
     return propValue + "update"
   })
-  assert.deepEqual(nestedObj, expectedNestedObj)
+  assert.deepEqual(actualNestedObj, {
+    nestedObjLevel1: {
+        nestedObjLevel2: [{
+            nestedObjLevel3: "some stringupdate"
+        }],
+        test : "/sometext/update"
+    }
+  } )
   console.log("Object Nested without clone Test Passed");
 
   //Test for array of object
@@ -51,35 +69,47 @@ if (Number(!process.versions.node.includes("14"))) {
 
   assert.deepStrictEqual(arrToUpdate, expectedArray)
   console.log("Array without clone Test Passed");
-
-  //Test for object clone
+  
+  // Test for object clone
   const objTNotUpdate = {
     nestedObjLevel1: {
         nestedObjLevel2: [{
-            nestedObjLevel3: "some string"
+            nestedObjLevel3: "some string",
+            nestedSubLevel3: null
         }],
         test : "/sometext/"
     }
   }
-  const expectedClone = sanitizeObject(objTNotUpdate, function (propValue) {
+  const actualClone = sanitizeObject(objTNotUpdate, function (propValue) {
     return propValue + " update"
   }, true)
-  assert.deepEqual(objTNotUpdate, expectedClone)
+  assert.deepEqual(actualClone, {
+    nestedObjLevel1: {
+        nestedObjLevel2: [{
+            nestedObjLevel3: "some string update",
+            nestedSubLevel3: null
+        }],
+        test : "/sometext/ update"
+    }
+  })
   console.log("Object clone Test Passed");
 
   const arrCloneNotToUpdate = [{
    test: "without append"
   }]
-  const expectedCloneArray = sanitizeObject(arrCloneNotToUpdate, function (oldValue) {
+  const actualCloneArray = sanitizeObject(arrCloneNotToUpdate, function (oldValue) {
     return oldValue + " append this string"
   }, true);
 
-  assert.deepEqual(arrCloneNotToUpdate, expectedCloneArray)
+  assert.deepEqual(actualCloneArray, [{
+    test: "without append append this string"
+   }])
   console.log("Array Clone one level Test Passed");
 
-  // Test 
+  // Nested array Test 
+
   const nestedTestArray = [{
-    test: "test"
+    test: null
   },
   "my old",
   [{
@@ -88,10 +118,30 @@ if (Number(!process.versions.node.includes("14"))) {
     }]
   }]
   ]
-  const expectedTestArray = sanitizeObject(nestedTestArray,(prpty) =>prpty + " append", true)
+  const actualTestArray1 = sanitizeObject(nestedTestArray,(prpty) =>prpty + " append", true)
 
-  assert.notDeepEqual(nestedTestArray, expectedTestArray)
-  console.log("Array Clone nested array Test Passed");
+  assert.deepEqual(actualTestArray1, [{
+    test: null
+  },
+  "my old append",
+  [{
+    test3: [{
+      nested: "to be appended by append"
+    }]
+  }]
+  ])
+  console.log("Array Clone nested array expected Test passed")
+  assert.deepEqual(nestedTestArray,  [{
+    test: null
+  },
+  "my old",
+  [{
+    test3: [{
+      nested: "to be appended by"
+    }]
+  }]
+  ])
+  console.log("Array Clone nested array do not modify ref Test Passed");
   
   //Test example 1
   var objectToUpdate1 = {
@@ -173,6 +223,13 @@ if (Number(!process.versions.node.includes("14"))) {
       nested: "to be appended by append"
     }]
   }]
-])
-console.log("Test example 4 passed")
+  ])
+  console.log("Test example 4 passed")
+  const testme = [[["MYSTRY"]]]
+  assert.deepEqual(sanitizeObject(testme, function (propValue) {
+    return propValue + " append"
+  }, true), [[["MYSTRY append"]]],)
+  assert.deepEqual(testme, [[["MYSTRY"]]],)
+  console.log("************HURRAY**************")
+  console.log("All Tests Passed")
 }
